@@ -4,9 +4,12 @@ export const resolvers = {
 	Query: {
 		async getUsers() {
 			return await User.find()
-		}
+		},
 	},
 	Mutation: {
+		async getUserByID(_, {_id}) {
+			return await User.findById(_id)
+		},
 		async createUser(_, {input}) {
 			const newUser = new User(input)
 			await newUser.save();
