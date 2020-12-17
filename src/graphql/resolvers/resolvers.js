@@ -2,7 +2,7 @@ import User from '../../models/user';
 
 export const resolvers = {
 	Query: {
-		async user() {
+		async getUsers() {
 			return await User.find()
 		}
 	},
@@ -11,6 +11,12 @@ export const resolvers = {
 			const newUser = new User(input)
 			await newUser.save();
 			return newUser
+		},
+		async deleteUser(_, {_id}) {
+			return await User.findByIdAndDelete(_id)
+		},
+		async updateUser(_, {id, input}) {
+			return await Message.findByIdAndUpdate(_id, input)
 		}
 	}
 };
